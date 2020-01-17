@@ -54,7 +54,7 @@ if __name__ == "__main__":
     b = int(input("Enter b (the maximum prime number factor): "))
     n = int(input("Enter n (as part of the public key): "))
     c = int(input("Enter c (the encrypted message to decrypt): "))
-    e = int(input("Enter e (es part of the public key): "))
+    e = int(input("Enter e (as part of the public key): "))
 
     # Demo:
     # b = 200000
