@@ -29,6 +29,9 @@ d (private key) = 14451978398579094721646395778026310395601055658351029431969521
 m (decrypted message) = 2020
 ```
 
+# Credits
+* Mirko Hoehn for helping me with the mathematics behind RSA.
+
 # License
 Copyright (c) 2020 Alexander Mayorov.
 
