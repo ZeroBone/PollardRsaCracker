@@ -28,7 +28,7 @@ def calculateK(b):
             maximalePrimFaktor = currentPrimFaktor
             currentExponent += 1
         
-        print("Found factor in k: "+str(currentPrime)+" ^ "+str(currentExponent)+" = "+str(maximalePrimFaktor))
+        # print("Found factor in k: "+str(currentPrime)+" ^ "+str(currentExponent)+" = "+str(maximalePrimFaktor))
         
         k *= maximalePrimFaktor
 
