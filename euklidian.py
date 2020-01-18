@@ -14,13 +14,13 @@ class GCD_Result:
         self.v = v
 
 def gcd(a, b):
-    while a != 0 and b != 0:
-        if a != 0:
-            b %= a
-
-        if b != 0:
-            a %= b
-    return a + b
+    while True:
+        if b == 0:
+            return a
+        a = a % b
+        if a == 0:
+            return b
+        b = b % a
 
 def extended_gcd(a, b):
     if a == 0:
