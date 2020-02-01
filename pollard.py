@@ -79,10 +79,10 @@ if __name__ == "__main__":
 
     print("Solving e * d = 1 mod phi(n) with the euklidian algorithm...")
 
-    ergebnis = extended_gcd(e, phi)
+    solution = extended_gcd(e, phi)
 
-    a = ergebnis.u
-    b = ergebnis.v
+    a = solution.u
+    b = solution.v
 
     print("a = " + str(a))
     print("b = " + str(b))
