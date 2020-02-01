@@ -62,7 +62,7 @@ if __name__ == "__main__":
     # c = 159178142916077677757648147687519523540045276157456113470673097514775229976995968698190914
     # e = 65537
 
-    print("Factorizing n to find ist prime divisors...")
+    print("Factorizing n to find its prime divisors...")
 
     p = pollard(b, n)
 

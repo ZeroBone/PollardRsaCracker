@@ -12,6 +12,8 @@ class GCD_Result:
         # u and v are the linear combination coefficients
         self.u = u
         self.v = v
+    def __str__(self):
+        return str(self.gcd) + " = " + str(self.u) + " * a + " + str(self.v) + " * b"
 
 def gcd(a, b):
     while True:
@@ -22,6 +24,7 @@ def gcd(a, b):
             return b
         b = b % a
 
+"""
 def extended_gcd(a, b):
     if a == 0:
         return GCD_Result(b, 0, 1)
@@ -33,3 +36,31 @@ def extended_gcd(a, b):
     result.v = u
 
     return result
+"""
+
+def extended_gcd(a, b):
+    if a == 0:
+        return GCD_Result(b, 0, 1)
+
+    unPrev = 1
+    vnPrev = 0
+    unCur = 0
+    vnCur = 1
+
+    while b != 0:
+        bn = a // b
+        newB = a % b
+        a = b
+        b = newB
+
+        # Update coefficients
+        unNew = unPrev - bn * unCur
+        vnNew = vnPrev - bn * vnCur
+
+        # Shift coefficients
+        unPrev = unCur
+        vnPrev = vnCur
+        unCur = unNew
+        vnCur = vnNew
+
+    return GCD_Result(a, unPrev, vnPrev)
