@@ -35,3 +35,11 @@ def nextPrime(n):
         n += 2
         if isPrime(n):
             return n
+
+def find_factor(n):
+    p = 2
+
+    while n % p != 0:
+        p = nextPrime(p)
+
+    return p

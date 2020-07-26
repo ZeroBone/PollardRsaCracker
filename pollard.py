@@ -7,7 +7,7 @@
 
 from prime import nextPrime
 from powmod import aPowbModn
-from euklidian import gcd, inverse_modulo
+from euklidian import gcd
 
 def calculateK(b):
 
@@ -40,11 +40,18 @@ def pollard(b, n):
 
     k = calculateK(b)
 
+    factor = 1
+    
+    while n % 2 == 0:
+        factor = factor * 2
+        n = n // 2
+
     # a is an arbitraty element in the multiplicative group of divisors of 1 modulo n
     # as gcd(n-1, n) = 1 for all n, we can pick a = n - 1
-    # or we can pick 2
+    # or we can pick 2 if n is odd
     a = 2 # n - 1
 
+    # print("k = " + str(k))
     print("k has " + str(len(str(k))) + " digits")
     print("a = " + str(a))
 
@@ -54,41 +61,4 @@ def pollard(b, n):
 
     p = gcd(aPowKModNminus1, n)
 
-    return p
-
-if __name__ == "__main__":
-    n = int(input("Enter n (as part of the public key): "))
-    e = int(input("Enter e (as part of the public key): "))
-    c = int(input("Enter c (the encrypted message to decrypt): "))
-    b = int(input("Enter b (the maximum prime factor in n, optional): ") or n)
-
-    # Demo:
-    # n = 186444745729857899758373984272541398503249351266417000699738642133172271283265124803102459
-    # e = 65537
-    # c = 159178142916077677757648147687519523540045276157456113470673097514775229976995968698190914
-    # b = 200000
-
-    print("Factorizing n to find its prime divisors...")
-
-    p = pollard(b, n)
-
-    print("p = " + str(p))
-
-    q = n // p
-
-    print("q = " + str(q))
-    print("Factorizing complete.")
-
-    phi = (p - 1) * (q - 1)
-
-    print("phi(n) = " + str(phi))
-
-    print("Solving e * d = 1 mod phi(n) with the euklidian algorithm...")
-
-    d = inverse_modulo(e, phi)
-
-    print("d (private key) = " + str(d))
-
-    m = aPowbModn(c, d, n)
-
-    print("m (decrypted message) = " + str(m))
+    return factor * p
