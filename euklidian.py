@@ -68,3 +68,11 @@ def extended_gcd(a, b):
         vnPrev = vnCur
         unCur = unNew
         vnCur = vnNew
+
+def inverse_modulo(a, n):
+    b = extended_gcd(a, n).u
+
+    if b < 0:
+        b += n
+        
+    return b
