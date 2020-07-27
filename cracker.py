@@ -14,7 +14,7 @@ if __name__ == "__main__":
     n = int(input("Enter n (as part of the public key): "))
     e = int(input("Enter e (as part of the public key): "))
     c = int(input("Enter c (the encrypted message to decrypt): "))
-    b = int(input("Enter b (the maximum prime factor in n, optional): ") or n)
+    b = int(input("Enter b (the maximum prime factor in n, optional): ") or 1)
 
     # Demo:
     # n = 186444745729857899758373984272541398503249351266417000699738642133172271283265124803102459
@@ -24,11 +24,13 @@ if __name__ == "__main__":
 
     p = None
 
-    if b >= n or b < 1:
+    if b > n or b <= 1:
         print("Factorizing n with the BRUTEFORCE algorithm...")
         p = find_factor(n)
     else:
         print("Factorizing n with the Pollard algorithm...")
+        if b > n - 1:
+            b = n - 1
         p = pollard(b, n)
 
     print("p = " + str(p))

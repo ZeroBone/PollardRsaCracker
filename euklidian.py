@@ -74,5 +74,11 @@ def inverse_modulo(a, n):
 
     if b < 0:
         b += n
-        
+
     return b
+
+def next_divisor_of(d, n):
+    d = d + 1
+    while d < n and gcd(d, n) != 1:
+        d = d + 1
+    return d

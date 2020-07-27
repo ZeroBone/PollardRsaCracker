@@ -7,7 +7,7 @@
 
 from prime import nextPrime
 from powmod import aPowbModn
-from euklidian import gcd
+from euklidian import gcd, next_divisor_of
 
 def calculateK(b):
 
@@ -28,7 +28,7 @@ def calculateK(b):
             maximalePrimFaktor = currentPrimFaktor
             currentExponent += 1
         
-        print("Found factor in k: "+str(currentPrime)+" ^ "+str(currentExponent)+" = "+str(maximalePrimFaktor))
+        # print("Found factor in k: "+str(currentPrime)+" ^ "+str(currentExponent)+" = "+str(maximalePrimFaktor))
         
         k *= maximalePrimFaktor
 
@@ -40,25 +40,22 @@ def pollard(b, n):
 
     k = calculateK(b)
 
-    factor = 1
-    
-    while n % 2 == 0:
-        factor = factor * 2
-        n = n // 2
-
-    # a is an arbitraty element in the multiplicative group of divisors of 1 modulo n
-    # as gcd(n-1, n) = 1 for all n, we can pick a = n - 1
-    # or we can pick 2 if n is odd
-    a = 2 # n - 1
-
     # print("k = " + str(k))
     print("k has " + str(len(str(k))) + " digits")
-    print("a = " + str(a))
 
-    aPowKModNminus1 = aPowbModn(a, k, n) - 1
+    p = 1
+    # a is an arbitraty element in the multiplicative group of divisors of 1 modulo n
+    a = next_divisor_of(1, n)
 
-    print("(a ^ k mod n) - 1 = " + str(aPowKModNminus1))
+    while p == 1 or p >= n:
+        print("Trying to solve with a = " + str(a))
 
-    p = gcd(aPowKModNminus1, n)
+        aPowKModNminus1 = aPowbModn(a, k, n) - 1
 
-    return factor * p
+        print("(a ^ k mod n) - 1 = " + str(aPowKModNminus1))
+
+        p = gcd(aPowKModNminus1, n)
+
+        a = next_divisor_of(a, n)
+
+    return p
