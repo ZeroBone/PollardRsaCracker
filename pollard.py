@@ -13,19 +13,9 @@ def compute_k(b: int) -> int:
 
         cur_expo = 1
 
-        max_prime_factor = cur_prime
-
-        while True:
-            cur_prime_factor = cur_prime ** (cur_expo + 1)
-
-            if cur_prime_factor > b:
-                break
-
-            max_prime_factor = cur_prime_factor
-
+        while cur_prime ** cur_expo <= b:
+            k *= cur_prime
             cur_expo += 1
-        
-        k *= max_prime_factor
 
         cur_prime = next_prime(cur_prime)
 
