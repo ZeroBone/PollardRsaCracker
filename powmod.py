@@ -1,11 +1,5 @@
-"""
-    Copyright (c) 2020 Alexander Mayorov
-    This project is licenced under the MIT Licence.
-    Please leave a copyright notice if you use/modify this software or parts of it.
-    For more information see the LICENCE file.
-"""
-
-def aPowbModn(a, b, n):
+def power_modulo(a: int, b: int, n: int) -> int:
+    """ Computes a ^ b mod n """
     result = 1
     
     # Loop through all the binary digits of the numbers

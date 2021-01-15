@@ -1,21 +1,4 @@
-"""
-    Copyright (c) 2020 Alexander Mayorov
-    This project is licenced under the MIT Licence.
-    Please leave a copyright notice if you use/modify this software or parts of it.
-    For more information see the LICENCE file.
-"""
-
-# Class to represent extended euklidian algorithm result
-class GCD_Result:
-    def __init__(self, gcd, u, v):
-        self.gcd = gcd
-        # u and v are the linear combination coefficients
-        self.u = u
-        self.v = v
-    def __str__(self):
-        return str(self.gcd) + " = " + str(self.u) + " * a + " + str(self.v) + " * b"
-
-def gcd(a, b):
+def gcd(a: int, b: int) -> int:
     while True:
         if b == 0:
             return a
@@ -24,61 +7,54 @@ def gcd(a, b):
             return b
         b = b % a
 
-"""
-def extended_gcd(a, b):
-    if a == 0:
-        return GCD_Result(b, 0, 1)
 
-    result = extended_gcd(b % a, a)
+def extended_gcd(a: int, b: int) -> (int, int, int):
+    if a == 0: # Optional check
+        return b, 0, 1
 
-    u = result.u
-    result.u = result.v - (b // a) * result.u
-    result.v = u
+    if b == 0: # Without this check the first iteration will divide by zero
+        return a, 1, 0
 
-    return result
-"""
-
-def extended_gcd(a, b):
-    if a == 0:
-        return GCD_Result(b, 0, 1)
-
-    if b == 0:
-        return GCD_Result(a, 1, 0)
-
-    unPrev = 1
-    vnPrev = 0
-    unCur = 0
-    vnCur = 1
+    un_prev = 1
+    vn_prev = 0
+    un_cur = 0
+    vn_cur = 1
 
     while True:
-        bn = a // b
-        newB = a % b
+        qn = a // b
+        new_r = a % b
         a = b
-        b = newB
+        b = new_r
 
         if b == 0:
-            return GCD_Result(a, unCur, vnCur)
+            return a, un_cur, vn_cur
 
         # Update coefficients
-        unNew = unPrev - bn * unCur
-        vnNew = vnPrev - bn * vnCur
+        un_new = un_prev - qn * un_cur
+        vn_new = vn_prev - qn * vn_cur
 
         # Shift coefficients
-        unPrev = unCur
-        vnPrev = vnCur
-        unCur = unNew
-        vnCur = vnNew
+        un_prev = un_cur
+        vn_prev = vn_cur
+        un_cur = un_new
+        vn_cur = vn_new
 
-def inverse_modulo(a, n):
-    b = extended_gcd(a, n).u
+
+def inverse_modulo(a: int, n: int) -> int:
+
+    _, b, _ = extended_gcd(a, n)
 
     if b < 0:
         b += n
 
     return b
 
-def next_divisor_of(d, n):
+
+def next_coprime(d: int, n: int) -> int:
+
     d = d + 1
+
     while d < n and gcd(d, n) != 1:
         d = d + 1
+
     return d

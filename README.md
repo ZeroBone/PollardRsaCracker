@@ -1,5 +1,5 @@
 # PollardRsaCracker
-This is my implementation of RSA cracking algorithm based on Pollard factorization. It will work if the prime number `n` as part of the public key has not a very big maximum prime factor. Of course, all modern RSA implementations don't have this security hole so this is more of an educational project that doesn't have much real-world applications.
+This is my implementation of RSA cracking algorithm based on Pollard factorization. It will work if the numbers `p - 1` and `q - 1` that form `n = p * q` (as a part of the public key, `p` and `q` are prime), have no large maximum prime power factors. Of course, all modern RSA implementations don't have this security issue so this is more of an educational project.
 
 # Usage
 In order to start the script, simply run `python cracker.py`
@@ -36,7 +36,7 @@ Enter n (as part of the public key): 493
 Enter e (as part of the public key): 45
 Enter c (the encrypted message to decrypt): 56
 Enter b (the maximum prime factor in n, optional):
-Factorizing n with the BRUTEFORCE algorithm...
+Factorizing n with the Bruteforce algorithm...
 p = 17
 q = 29
 Factorizing complete.
@@ -76,7 +76,8 @@ m (decrypted message) = 490
 ```
 
 # Credits
-* Mirko Hoehn for helping me with the mathematics behind RSA.
+* [This awesome lecture where I learnt about RSA](https://www.mathematik.uni-kl.de/~boehm/lehre/1920_MfI/)
+* Mirko Höhn for helping me understand the mathematics behind RSA.
 
 # License
 Copyright (c) 2020 Alexander Mayorov.

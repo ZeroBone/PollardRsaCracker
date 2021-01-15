@@ -1,61 +1,57 @@
-"""
-    Copyright (c) 2020 Alexander Mayorov
-    This project is licenced under the MIT Licence.
-    Please leave a copyright notice if you use/modify this software or parts of it.
-    For more information see the LICENCE file.
-"""
+from prime import next_prime
+from powmod import power_modulo
+from euklidian import gcd, next_coprime
 
-from prime import nextPrime
-from powmod import aPowbModn
-from euklidian import gcd, next_divisor_of
 
-def calculateK(b):
+def compute_k(b: int) -> int:
 
     k = 1
 
-    currentPrime = 2
+    cur_prime = 2
 
-    while currentPrime < b:
+    while cur_prime <= b:
 
-        currentExponent = 1
+        cur_expo = 1
 
-        maximalePrimFaktor = currentPrime
+        max_prime_factor = cur_prime
 
         while True:
-            currentPrimFaktor = currentPrime ** (currentExponent + 1)
-            if currentPrimFaktor > b:
-                break
-            maximalePrimFaktor = currentPrimFaktor
-            currentExponent += 1
-        
-        # print("Found factor in k: "+str(currentPrime)+" ^ "+str(currentExponent)+" = "+str(maximalePrimFaktor))
-        
-        k *= maximalePrimFaktor
+            cur_prime_factor = cur_prime ** (cur_expo + 1)
 
-        currentPrime = nextPrime(currentPrime)
+            if cur_prime_factor > b:
+                break
+
+            max_prime_factor = cur_prime_factor
+
+            cur_expo += 1
+        
+        k *= max_prime_factor
+
+        cur_prime = next_prime(cur_prime)
 
     return k
 
-def pollard(b, n):
 
-    k = calculateK(b)
+def pollard(b: int, n: int) -> int:
 
-    # print("k = " + str(k))
-    print("k has " + str(len(str(k))) + " digits")
+    k = compute_k(b)
+
+    print("k has %d digits" % len(str(k)))
 
     p = 1
     # a is an arbitraty element in the multiplicative group of divisors of 1 modulo n
-    a = next_divisor_of(1, n)
+    a = next_coprime(1, n)
 
     while p == 1 or p >= n:
-        print("Trying to solve with a = " + str(a))
 
-        aPowKModNminus1 = aPowbModn(a, k, n) - 1
+        print("Trying to solve with a = %d" % a)
 
-        print("(a ^ k mod n) - 1 = " + str(aPowKModNminus1))
+        a_pow_k_mod_n_minus1 = power_modulo(a, k, n) - 1
 
-        p = gcd(aPowKModNminus1, n)
+        print("(a ^ k mod n) - 1 = %d" % a_pow_k_mod_n_minus1)
 
-        a = next_divisor_of(a, n)
+        p = gcd(a_pow_k_mod_n_minus1, n)
+
+        a = next_coprime(a, n)
 
     return p
