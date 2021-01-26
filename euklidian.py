@@ -44,10 +44,7 @@ def inverse_modulo(a: int, n: int) -> int:
 
     _, b, _ = extended_gcd(a, n)
 
-    if b < 0:
-        b += n
-
-    return b
+    return b % n
 
 
 def next_coprime(d: int, n: int) -> int:
