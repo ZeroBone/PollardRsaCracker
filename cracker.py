@@ -39,7 +39,7 @@ def main():
     print("q = %d" % q)
     print("Factorizing complete.")
 
-    phi = (p - 1) * (q - 1)
+    phi = (p - 1) * (q - 1) if p != q else p * p - p
 
     print("phi(n) = %d" % phi)
 
