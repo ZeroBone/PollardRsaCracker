@@ -5,7 +5,7 @@ This is my implementation of RSA cracking algorithm based on Pollard factorizati
 In order to start the script, simply run `python cracker.py`
 
 You will need 4 inputs:
-1. `n` - prime number in the public key so that `m = c ^ d mod n` where `m` is the message, `c` is the encrypted message, `d` is the private key.
+1. `n` - the modulus in the public key so that `m = c ^ d mod n` where `m` is the message, `c` is the encrypted message, `d` is the private key.
 2. `e` - the second public key component (so that `gcd(e, phi(n)) = 1`).
 3. `c` - the encrypted message.
 4. `b` - the maximum prime factor of `n`. This field is optional. However, if you leave it blank, the brute-force algorithm will be used for factorizing `n`.
